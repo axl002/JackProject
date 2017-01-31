@@ -132,8 +132,8 @@ public class JackKafka {
                         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
                         Date dateobj = new Date();
                         System.out.println(topic);
-                        
-                        producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, "test"));
+
+                        producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, priceNote));
                         //System.out.println(item.toString());
                     }catch (NullPointerException oopsNoNote){
                         //System.out.println("no note, no price, no list");
