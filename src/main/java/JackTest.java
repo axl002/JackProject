@@ -19,7 +19,7 @@ public class JackTest {
     static String startingKey = "14350132-15488408-14347080-16227772-15696575";
     static String theSource = "http://api.pathofexile.com/public-stash-tabs?id=";
     static String whereToDump = "testdump/";
-    static String topic = "poeapi";
+    static String topic = "poe2";
     static String currentKey;
 
     public static void main(String[] args) {
