@@ -30,17 +30,23 @@ public class Item{
     static double parseValue(String note){
         String dankNote = note.toLowerCase();
         // check if buyout
-        if(dankNote.contains("~b/o".toLowerCase())){
-            if (dankNote.contains("chaos")){
-                return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""))/72;
+        try {
+            if(dankNote.contains("~b/o".toLowerCase())){
+                if (dankNote.contains("chaos")){
+                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""))/72;
+                }
+                else if (dankNote.contains("exa")){
+                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""));
+                }
+                else {
+                    return -1;
+                }
             }
-            else if (dankNote.contains("exa")){
-                return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""));
-            }
-            else {
-                return -1;
-            }
+            // problem formatting number skip and return -3
+        }catch (NumberFormatException nfe){
+            return -3;
         }
+
         return -2;
     }
 

@@ -16,7 +16,7 @@ public class JackTest {
     //static KafkaProducer<String, String> producer;
     static int reps = 0;
     static int numberOfQueryToGet = 1000;
-    static String startingKey = "0";
+    static String startingKey = "7464848-7965512-7351484-8587137-8031520";
     static String theSource = "http://api.pathofexile.com/public-stash-tabs?id=";
     static String whereToDump = "testdump/";
     static String topic = "poeapi";
@@ -109,7 +109,9 @@ public class JackTest {
                         item.setItemID(currentItem.get("id").asText());
                         item.setName(currentItem.get("name").asText());
                         item.setTypeLine(currentItem.get("typeLine").asText());
+                        System.out.println(priceNote);
                         item.setNote(priceNote);
+
                         item.setLastSeller(accountName);
                         item.setLastStashID(stashId);
                         item.setLeague(currentItem.get("league").asText());
