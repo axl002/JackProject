@@ -127,6 +127,7 @@ public class JackKafka {
                         }catch (NullPointerException noExpMods){
                             // not all items have explicit mods
                         }
+
                         // test code for pushing string data
                         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
                         Date dateobj = new Date();
