@@ -125,7 +125,7 @@ public class JackKafka {
                             // not all items have explicit mods
                         }
                         // test code for pushing string data
-                        producer.send(new ProducerRecord<String, String>(topic, nextChangeId, priceNote.toString()));
+                        producer.send(new ProducerRecord<String, String>(topic, nextChangeId, "test"));
                         //System.out.println(item.toString());
                     }catch (NullPointerException oopsNoNote){
                         //System.out.println("no note, no price, no list");
