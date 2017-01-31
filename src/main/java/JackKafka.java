@@ -18,7 +18,7 @@ public class JackKafka {
     static KafkaProducer<String, String> producer;
     static int reps = 0;
     static int numberOfQueryToGet = 1000;
-    static String startingKey = "7464848-7965512-7351484-8587137-8031520";
+    static String startingKey = "0";
     static String theSource = "http://api.pathofexile.com/public-stash-tabs?id=";
     static String whereToDump = "testdump/";
     static String topic = "poe2";
