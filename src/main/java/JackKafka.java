@@ -7,6 +7,9 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import java.io.*;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 
 import java.util.Properties;
@@ -17,7 +20,7 @@ public class JackKafka {
 
     static KafkaProducer<String, String> producer;
     static int reps = 0;
-    static int numberOfQueryToGet = 1000;
+    static int numberOfQueryToGet = 5;
     static String startingKey = "0";
     static String theSource = "http://api.pathofexile.com/public-stash-tabs?id=";
     static String whereToDump = "testdump/";
@@ -125,7 +128,9 @@ public class JackKafka {
                             // not all items have explicit mods
                         }
                         // test code for pushing string data
-                        producer.send(new ProducerRecord<String, String>(topic, System.currentTimeMillis()+nextChangeId, "test"));
+                        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+                        Date dateobj = new Date();
+                        producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, "test"));
                         //System.out.println(item.toString());
                     }catch (NullPointerException oopsNoNote){
                         //System.out.println("no note, no price, no list");

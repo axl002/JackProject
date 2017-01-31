@@ -50,8 +50,8 @@
       <file leaf-file-name="JackKafka.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/JackKafka.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="127" column="86" lean-forward="true" selection-start-line="127" selection-start-column="86" selection-end-line="127" selection-end-column="86" />
+            <state relative-caret-position="360">
+              <caret line="131" column="50" lean-forward="true" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -321,6 +321,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="last_opened_file_path" value="$USER_HOME$/apitest" />
   </component>
   <component name="RunManager" selected="Application.JackTest">
     <configuration default="false" name="JackTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -804,8 +805,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/JackKafka.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="127" column="86" lean-forward="true" selection-start-line="127" selection-start-column="86" selection-end-line="127" selection-end-column="86" />
+        <state relative-caret-position="360">
+          <caret line="131" column="50" lean-forward="true" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
