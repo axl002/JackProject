@@ -109,7 +109,7 @@ public class JackTest {
                         item.setItemID(currentItem.get("id").asText());
                         item.setName(currentItem.get("name").asText());
                         item.setTypeLine(currentItem.get("typeLine").asText());
-                        System.out.println(priceNote);
+                        //System.out.println(priceNote);
                         item.setNote(priceNote);
 
                         item.setLastSeller(accountName);
