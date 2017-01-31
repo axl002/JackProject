@@ -2,10 +2,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-import java.io.BufferedReader;
+import java.io.*;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Iterator;
 
@@ -76,6 +74,7 @@ public class JackTest {
         JsonNode rootNode = null;
         if(!isContentNull(content)){
             rootNode = mapper.readTree(content);
+            writeOutput(whereToDump,keyToUse,content);
         }
 
         // extract next change id
@@ -132,6 +131,12 @@ public class JackTest {
         checkNew(nextChangeId);
     }
 
+    private static void writeOutput(String outPath, String name, String content) throws IOException{
+        FileWriter fw = new FileWriter(new File(outPath + name + ".json"));
+        fw.write(content);
+        fw.close();
+
+    }
     private static String pullURL(URL whereToPull) throws IOException, InterruptedException {
         //TimeUnit.SECONDS.sleep(1);
         //System.out.println(url.toString());
