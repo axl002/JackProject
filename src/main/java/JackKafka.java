@@ -1,5 +1,7 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 
 
 import java.io.*;
@@ -11,15 +13,15 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 
-public class JackTest {
+public class JackKafka {
 
-    //static KafkaProducer<String, String> producer;
+    static KafkaProducer<String, String> producer;
     static int reps = 0;
     static int numberOfQueryToGet = 1000;
-    static String startingKey = "14350132-15488408-14347080-16227772-15696575";
+    static String startingKey = "7464848-7965512-7351484-8587137-8031520";
     static String theSource = "http://api.pathofexile.com/public-stash-tabs?id=";
     static String whereToDump = "testdump/";
-    static String topic = "poeapi";
+    static String topic = "poe2";
     static String currentKey;
 
     public static void main(String[] args) {
@@ -47,7 +49,7 @@ public class JackTest {
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-       // producer = new KafkaProducer<String, String>(props);
+        producer = new KafkaProducer<String, String>(props);
 
         currentKey = startingKey;
         int howMany = 0;
@@ -60,6 +62,7 @@ public class JackTest {
             }
         }
         System.out.println("Last key was: " + currentKey);
+        producer.close();
     }
 
     private static void goProduce(String keyToUse) throws NullPointerException, InterruptedException, IOException{
@@ -74,7 +77,7 @@ public class JackTest {
         JsonNode rootNode = null;
         if(!isContentNull(content)){
             rootNode = mapper.readTree(content);
-            writeOutput(whereToDump,keyToUse,content);
+            //writeOutput(whereToDump,keyToUse,content);
         }
 
         // extract next change id
@@ -121,6 +124,8 @@ public class JackTest {
                         }catch (NullPointerException noExpMods){
                             // not all items have explicit mods
                         }
+                        // test code for pushing string data
+                        producer.send(new ProducerRecord<String, String>(topic, nextChangeId, currentItem.asText()));
                         //System.out.println(item.toString());
                     }catch (NullPointerException oopsNoNote){
                         //System.out.println("no note, no price, no list");
@@ -177,7 +182,7 @@ public class JackTest {
 
 
 
-            //System.out.println(" you win " + bigStashArray.iterator().next().asText());
+//System.out.println(" you win " + bigStashArray.iterator().next().asText());
 
 
 
@@ -222,9 +227,9 @@ public class JackTest {
 ////                    rf.setStashes(jp.getText());
 //
 //                }
-                //throw new IllegalStateException("Unrecognized field '"+fieldname+"'!");
-            //}
-            //jp.close(); // ensure resources get cleaned up timely and properly
-            //
-            // System.out.println(rf.getnext_change_id());
+//throw new IllegalStateException("Unrecognized field '"+fieldname+"'!");
+//}
+//jp.close(); // ensure resources get cleaned up timely and properly
+//
+// System.out.println(rf.getnext_change_id());
 
