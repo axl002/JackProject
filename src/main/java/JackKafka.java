@@ -114,14 +114,10 @@ public class JackKafka {
                 while(itemIt.hasNext()){
 
                     JsonNode currentItem = itemIt.next();
-                    try {
-                        ObjectNode on = currentItem.deepCopy();
-                        on.put("accountName", currentStash.get("accountName").asText());
-                        on.put("stashID", currentStash.get("id").asText());
-                        System.out.println(on.get("accountName").asText());
-                    }catch (Exception e){
-                        System.exit(555);
-                    }
+
+                    ObjectNode on = currentItem.deepCopy();
+                    on.put("accountName", currentStash.get("accountName").asText());
+                    on.put("stashID", currentStash.get("id").asText());
 
                     try {
                         String priceNote = currentItem.get("note").asText();
@@ -152,7 +148,7 @@ public class JackKafka {
                         Date dateobj = new Date();
                         //producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, Double.toString(item.getPrice()) ));
 
-                        producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, currentItem.toString() ));
+                        producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, on.toString() ));
                         //System.out.println(item.toString());
                     }catch (NullPointerException oopsNoNote){
                         //System.out.println("no note, no price, no list");
