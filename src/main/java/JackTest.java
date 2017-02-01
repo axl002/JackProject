@@ -77,7 +77,7 @@ public class JackTest {
         JsonNode rootNode = null;
         if(!isContentNull(content)){
             rootNode = mapper.readTree(content);
-            //writeOutput(whereToDump,keyToUse,content);
+            writeOutput(whereToDump,keyToUse,content);
         }
 
         // extract next change id
@@ -109,14 +109,7 @@ public class JackTest {
 //                    ObjectMapper compositeMapper = new ObjectMapper();
 //                    JsonNode compositeNode = null;
 //                    compositeNode = mapper.readTree(compositeItem);
-                    try {
-                        ObjectNode on = (ObjectNode) currentItem;
-                        on.put("accountName", currentStash.get("accountName").asText());
-                        on.put("stashID", currentStash.get("id").asText());
-                        System.out.println(on.get("accountName").asText());
-                    }catch (Exception e){
-                        System.exit(555);
-                    }
+
                     try {
                         String priceNote = currentItem.get("note").asText();
                         Item item = new Item();
