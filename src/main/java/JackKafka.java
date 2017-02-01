@@ -115,6 +115,7 @@ public class JackKafka {
 
                     JsonNode currentItem = itemIt.next();
                     ObjectNode on = currentItem.deepCopy();
+                    System.out.println("copy done fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
                     on.put("accountName",accountName);
                     on.put("stashId",stashId);
 
