@@ -1,17 +1,14 @@
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.fasterxml.jackson.dataformat.smile.SmileFactory;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
-import com.fasterxml.jackson.dataformat.smile.SmileFactory;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Map;
-import java.io.Closeable;
-
 
 /**
  * Created by user on 1/31/17.
@@ -46,8 +43,16 @@ public class ItemSerializer implements  Closeable, AutoCloseable, Serializer<Ite
         }
     }
 
+    // was missing
     public void configure(Map<String, ?> map, boolean b) {
-
+        if(mapper == null) {
+            if("true".equals(map.get("value.serializer.jackson.smile"))) {
+                mapper = new ObjectMapper(new SmileFactory());
+            }
+            else {
+                mapper = new ObjectMapper();
+            }
+        }
     }
 
     public byte[] serialize(String s, Item item) {
