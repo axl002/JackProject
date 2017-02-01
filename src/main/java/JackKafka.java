@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -113,7 +114,7 @@ public class JackKafka {
                 while(itemIt.hasNext()){
 
                     JsonNode currentItem = itemIt.next();
-                    ObjectNode on = (ObjectNode)currentItem;
+                    ObjectNode on = currentItem.deepCopy();
                     on.put("accountName",accountName);
                     on.put("stashId",stashId);
 
