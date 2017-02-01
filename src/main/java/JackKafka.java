@@ -113,8 +113,9 @@ public class JackKafka {
                 while(itemIt.hasNext()){
 
                     JsonNode currentItem = itemIt.next();
-                    //((ObjectNode)currentItem).put("accountName",accountName);
-                    //((ObjectNode)currentItem).put("stashId",stashId);
+                    ObjectNode on = (ObjectNode)currentItem;
+                    on.put("accountName",accountName);
+                    on.put("stashId",stashId);
 
                     try {
                         String priceNote = currentItem.get("note").asText();
@@ -138,7 +139,7 @@ public class JackKafka {
                         }catch (NullPointerException noExpMods){
                             // not all items have explicit mods
                         }
-                        System.out.println(currentItem.get("stashID").asText());
+                        System.out.println(on.get("stashID").asText());
 
                         // test code for pushing string data
                         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
