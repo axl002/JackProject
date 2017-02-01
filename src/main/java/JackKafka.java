@@ -131,7 +131,7 @@ public class JackKafka {
                         // test code for pushing string data
                         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
                         Date dateobj = new Date();
-                        producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, currentItem.toString()));
+                        producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, Double.toString(item.getPrice()) ));
                         //System.out.println(item.toString());
                     }catch (NullPointerException oopsNoNote){
                         //System.out.println("no note, no price, no list");

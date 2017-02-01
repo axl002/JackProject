@@ -10,7 +10,7 @@ public class Item{
     public String y;
     public int ilvl;
     public String icon;
-    public String League;
+    public String league;
     public String itemID;
     public String name;
     public String typeLine;
@@ -116,11 +116,11 @@ public class Item{
     }
 
     public String getLeague() {
-        return League;
+        return league;
     }
 
     public void setLeague(String league) {
-        League = league;
+        this.league = league;
     }
 
     public String getItemID() {
