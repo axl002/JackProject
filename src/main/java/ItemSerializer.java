@@ -3,20 +3,20 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.smile.SmileFactory;
+
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
-
+import com.fasterxml.jackson.dataformat.smile.SmileFactory;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.logging.Logger;
+import java.io.Closeable;
 
 
 /**
  * Created by user on 1/31/17.
  */
-public class ItemSerializer implements Serializer<Item>, Deserializer<Item> {
+public class ItemSerializer implements  Closeable, AutoCloseable, Serializer<Item>, Deserializer<Item> {
     //private static final Logger logger = Logger.getLogger(ItemSerializer.class);
 
     private ObjectMapper mapper;
@@ -27,6 +27,14 @@ public class ItemSerializer implements Serializer<Item>, Deserializer<Item> {
 
     public ItemSerializer(ObjectMapper mapper) {
         this.mapper = mapper;
+    }
+
+    public static ItemSerializer defaultConfig() {
+        return new ItemSerializer(new ObjectMapper());
+    }
+
+    public static ItemSerializer smileConfig() {
+        return new ItemSerializer(new ObjectMapper(new SmileFactory()));
     }
 
     public Item deserialize(String s, byte[] bytes) {
