@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class JackKafka {
 
-    static KafkaProducer<String, Item> producer;
+    static KafkaProducer<String, String> producer;
     static int reps = 0;
     static int numberOfQueryToGet = 5;
     static String startingKey = "0";
@@ -50,12 +50,14 @@ public class JackKafka {
 
         // change this to a time stamp serializer
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        //props.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
+        producer = new KafkaProducer<String, String>(props);
 
-        props.put("value.serializer", ItemSerializer.class.getName());
-        props.put("value.serializer.jackson.smile", "true");
+        // for item serialization
+        //props.put("value.serializer", ItemSerializer.class.getName());
+        //props.put("value.serializer.jackson.smile", "true");
 
-        producer = new KafkaProducer<String, Item>(props);
+        //producer = new KafkaProducer<String, Item>(props);
 
         currentKey = startingKey;
         int howMany = 0;
@@ -137,7 +139,7 @@ public class JackKafka {
                         Date dateobj = new Date();
                         //producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, Double.toString(item.getPrice()) ));
 
-                        producer.send(new ProducerRecord<String, Item>(topic, df.format(dateobj)+ nextChangeId, item));
+                        producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, currentItem.toString() + "price: " + item.getPrice() ));
                         //System.out.println(item.toString());
                     }catch (NullPointerException oopsNoNote){
                         //System.out.println("no note, no price, no list");
