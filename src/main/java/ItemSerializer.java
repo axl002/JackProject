@@ -109,7 +109,7 @@ public class ItemSerializer implements  Closeable, AutoCloseable, Serializer<Ite
             helper.verified = packed.getVerified();
             helper.price = packed.getPrice();
             helper.explicitMods = packed.getExplicitMods();
-            helper.flavorText = packed.getFlavorText();
+            helper.flavorText = packed.getFlavourText();
 
             return helper;
         }
@@ -131,7 +131,7 @@ public class ItemSerializer implements  Closeable, AutoCloseable, Serializer<Ite
             unPacked.setVerified(verified);
             //no set price
             unPacked.setExplicitMods(explicitMods);
-            unPacked.setFlavorText(flavorText);
+            unPacked.setFlavourText(flavorText);
             return unPacked;
         }
     }

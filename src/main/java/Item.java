@@ -1,6 +1,3 @@
-import com.fasterxml.jackson.databind.introspect.BasicBeanDescription;
-
-
 //item schema for jackson
 // includes seller info
 public class Item{
@@ -21,7 +18,7 @@ public class Item{
     public double price;
     //public RawFormat.PropertyList propertyList;
     public String explicitMods;
-    public String flavorText;
+    public String flavourText;
     //public String rawJsonForm;
 
     public Item(){
@@ -182,12 +179,12 @@ public class Item{
         this.explicitMods = explicitMods;
     }
 
-    public String getFlavorText() {
-        return flavorText;
+    public String getFlavourText() {
+        return flavourText;
     }
 
-    public void setFlavorText(String flavorText) {
-        this.flavorText = flavorText;
+    public void setFlavourText(String flavourText) {
+        this.flavourText = flavourText;
     }
 
     public String getInventoryID() {

@@ -1,5 +1,7 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -111,6 +113,9 @@ public class JackKafka {
                 while(itemIt.hasNext()){
 
                     JsonNode currentItem = itemIt.next();
+                    ((ObjectNode)currentItem).put("accountName",accountName);
+                    ((ObjectNode)currentItem).put("stashId",stashId);
+
                     try {
                         String priceNote = currentItem.get("note").asText();
                         Item item = new Item();
@@ -123,6 +128,7 @@ public class JackKafka {
                         //System.out.println(priceNote);
                         item.setNote(priceNote);
 
+
                         item.setLastSeller(accountName);
                         item.setLastStashID(stashId);
                         item.setLeague(currentItem.get("league").asText());
@@ -132,7 +138,7 @@ public class JackKafka {
                         }catch (NullPointerException noExpMods){
                             // not all items have explicit mods
                         }
-
+                        System.out.println(currentItem.get("stashID").asText());
 
                         // test code for pushing string data
                         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
