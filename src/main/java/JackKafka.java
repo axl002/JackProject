@@ -113,8 +113,8 @@ public class JackKafka {
                 while(itemIt.hasNext()){
 
                     JsonNode currentItem = itemIt.next();
-                    ((ObjectNode)currentItem).put("accountName",accountName);
-                    ((ObjectNode)currentItem).put("stashId",stashId);
+                    //((ObjectNode)currentItem).put("accountName",accountName);
+                    //((ObjectNode)currentItem).put("stashId",stashId);
 
                     try {
                         String priceNote = currentItem.get("note").asText();
