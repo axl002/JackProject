@@ -1,5 +1,8 @@
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 import java.io.*;
@@ -16,7 +19,7 @@ public class JackTest {
     //static KafkaProducer<String, String> producer;
     static int reps = 0;
     static int numberOfQueryToGet = 1000;
-    static String startingKey = "14350132-15488408-14347080-16227772-15696575";
+    static String startingKey = "0";
     static String theSource = "http://api.pathofexile.com/public-stash-tabs?id=";
     static String whereToDump = "testdump/";
     static String topic = "poe2";
@@ -74,7 +77,7 @@ public class JackTest {
         JsonNode rootNode = null;
         if(!isContentNull(content)){
             rootNode = mapper.readTree(content);
-            writeOutput(whereToDump,keyToUse,content);
+            //writeOutput(whereToDump,keyToUse,content);
         }
 
         // extract next change id
@@ -100,6 +103,20 @@ public class JackTest {
                 while(itemIt.hasNext()){
 
                     JsonNode currentItem = itemIt.next();
+
+                    //JsonNode currentItem = itemIt.next();
+//                    String compositeItem = "{" + currentItem.asText() +"\n\"accountName\": " + currentStash.get("accountName") + ",\n" + "\"stashID\": " + currentStash.get("id")+ "}";
+//                    ObjectMapper compositeMapper = new ObjectMapper();
+//                    JsonNode compositeNode = null;
+//                    compositeNode = mapper.readTree(compositeItem);
+                    try {
+                        ObjectNode on = (ObjectNode) currentItem;
+                        on.put("accountName", currentStash.get("accountName").asText());
+                        on.put("stashID", currentStash.get("id").asText());
+                        System.out.println(on.get("accountName").asText());
+                    }catch (Exception e){
+                        System.exit(555);
+                    }
                     try {
                         String priceNote = currentItem.get("note").asText();
                         Item item = new Item();

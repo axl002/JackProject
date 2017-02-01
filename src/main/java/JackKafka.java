@@ -114,6 +114,13 @@ public class JackKafka {
                 while(itemIt.hasNext()){
 
                     JsonNode currentItem = itemIt.next();
+                    String compositeItem = currentItem.asText() + "{accountName:, " + currentStash.get("accountName") + "}";
+                    ObjectMapper compositeMapper = new ObjectMapper();
+                    JsonNode compositeNode = null;
+                    compositeNode = mapper.readTree(compositeItem);
+
+                    System.out.println(compositeNode.asText());
+
                     //ObjectNode on = currentItem.deepCopy();
                     //System.out.println("copy done fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
                     //on.put("accountName",accountName);
