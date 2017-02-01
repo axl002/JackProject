@@ -50,7 +50,7 @@ public class JackKafka {
 
         // change this to a time stamp serializer
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         producer = new KafkaProducer<String, String>(props);
 
         // for item serialization
