@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.introspect.BasicBeanDescription;
 
 
 //item schema for jackson
@@ -21,6 +22,7 @@ public class Item{
     //public RawFormat.PropertyList propertyList;
     public String explicitMods;
     public String flavorText;
+    //public String rawJsonForm;
 
     public Item(){
     }
@@ -51,10 +53,18 @@ public class Item{
     }
 
 
+
+//    public void setRawJsonForm(String rawJsonForm){
+//        this.rawJsonForm = rawJsonForm;
+//    }
+//    public String getRawJsonForm(){
+//        return rawJsonForm;
+//    }
     // print out useful info
     public String toString(){
         return "Name: " + getName() + getTypeLine() + "\nPrice: " + getPrice() + "\nID: " + getItemID() + "\nLastOwner: " + getLastSeller() + " " + getLastStashID() + "\nMods" + printExplicitMods();
     }
+
 
     public String printExplicitMods(){
         return explicitMods;
@@ -148,7 +158,7 @@ public class Item{
         setPrice(note);
     }
 
-    public boolean isIdentified() {
+    public boolean getIdentified() {
         return identified;
     }
 
@@ -156,7 +166,7 @@ public class Item{
         this.identified = identified;
     }
 
-    public boolean isVerified() {
+    public boolean getVerified() {
         return verified;
     }
 
