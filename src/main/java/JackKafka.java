@@ -74,7 +74,7 @@ public class JackKafka {
                     //File file = listOfFiles[k];
                     if( listOfFiles[k].getName().contains(".json"))
                     {
-                        goProduce(currentKey);
+                        goProduce(currentKey, pullLocalJson(listOfFiles[k]));
                         howMany++;
                     }
                 }
@@ -86,7 +86,7 @@ public class JackKafka {
         producer.close();
     }
 
-    private static void goProduce(String keyToUse) throws NullPointerException, InterruptedException, IOException{
+    private static void goProduce(String keyToUse, String content) throws NullPointerException, InterruptedException, IOException{
 
         //create object mapper load file to parse
         ObjectMapper mapper = new ObjectMapper();
@@ -99,7 +99,7 @@ public class JackKafka {
 
 
 
-        String content = pullURL(url);
+        //content = pullURL(url);
         JsonNode rootNode = null;
         if(!isContentNull(content)){
             rootNode = mapper.readTree(content);
