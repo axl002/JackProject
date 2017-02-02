@@ -39,7 +39,7 @@ public class ReadAndInsert {
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
 
         try {
-            r.db("test").tableCreate("poeapi").run(conn);
+            r.db("poeapi").tableCreate("itemCount").run(conn);
         }
         catch (ReqlOpFailedError oops){
             // don't die if table no exist
@@ -63,7 +63,7 @@ public class ReadAndInsert {
             ConsumerRecords<String, String> records = consumer.poll(100);
 
             for (ConsumerRecord<String, String> record : records) {
-                r.table("poeapi").insert(r.hashMap("foo", "bar")).run(conn);
+                r.table("itemCount").insert(r.hashMap("foo", record.value())).run(conn);
             }
         }
     }
