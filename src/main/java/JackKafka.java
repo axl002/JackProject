@@ -76,7 +76,7 @@ public class JackKafka {
                     {
                         goProduce(currentKey, pullLocalJson(listOfFiles[k]));
                         howMany++;
-                        System.out.println(howMany < numberOfQueryToGet);
+                        //System.out.println(howMany < numberOfQueryToGet);
                     }
                 }
             } catch (Exception bad) {
@@ -135,28 +135,28 @@ public class JackKafka {
                     on.put("accountName", currentStash.get("accountName").asText());
                     on.put("stashID", currentStash.get("id").asText());
 
-                    try {
-                        String priceNote = currentItem.get("note").asText();
-                        Item item = new Item();
-                        item.setY(currentItem.get("y").asText());
-                        item.setX(currentItem.get("x").asText());
-                        item.setIdentified(currentItem.get("identified").asBoolean());
-                        item.setItemID(currentItem.get("id").asText());
-                        item.setName(currentItem.get("name").asText());
-                        item.setTypeLine(currentItem.get("typeLine").asText());
-                        //System.out.println(priceNote);
-                        item.setNote(priceNote);
-
-
-                        item.setLastSeller(accountName);
-                        item.setLastStashID(stashId);
-                        item.setLeague(currentItem.get("league").asText());
-                        item.setIlvl(currentItem.get("ilvl").asInt());
-                        try{
-                            item.setExplicitMods(currentItem.get("explicitMods").toString());
-                        }catch (NullPointerException noExpMods){
-                            // not all items have explicit mods
-                        }
+//                    try {
+//                        String priceNote = currentItem.get("note").asText();
+//                        Item item = new Item();
+//                        item.setY(currentItem.get("y").asText());
+//                        item.setX(currentItem.get("x").asText());
+//                        item.setIdentified(currentItem.get("identified").asBoolean());
+//                        item.setItemID(currentItem.get("id").asText());
+//                        item.setName(currentItem.get("name").asText());
+//                        item.setTypeLine(currentItem.get("typeLine").asText());
+//                        //System.out.println(priceNote);
+//                        item.setNote(priceNote);
+//
+//
+//                        item.setLastSeller(accountName);
+//                        item.setLastStashID(stashId);
+//                        item.setLeague(currentItem.get("league").asText());
+//                        item.setIlvl(currentItem.get("ilvl").asInt());
+//                        try{
+//                            item.setExplicitMods(currentItem.get("explicitMods").toString());
+//                        }catch (NullPointerException noExpMods){
+//                            // not all items have explicit mods
+//                        }
                         //System.out.println(on.get("stashID").asText());
 
                         // test code for pushing string data
@@ -166,9 +166,9 @@ public class JackKafka {
 
                         producer.send(new ProducerRecord<String, String>(topic, df.format(dateobj)+ nextChangeId, on.toString() ));
                         //System.out.println(item.toString());
-                    }catch (NullPointerException oopsNoNote){
-                        //System.out.println("no note, no price, no list");
-                    }
+//                    }catch (NullPointerException oopsNoNote){
+//                        //System.out.println("no note, no price, no list");
+//                    }
                 }
             }
         }
