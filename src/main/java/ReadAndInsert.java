@@ -63,7 +63,7 @@ public class ReadAndInsert {
             ConsumerRecords<String, String> records = consumer.poll(100);
 
             for (ConsumerRecord<String, String> record : records) {
-                r.table("poeapi").insert(r.hashMap(record.key(), record.value())).run(conn);
+                r.table("poeapi").insert(r.hashMap("foo", "bar")).run(conn);
             }
         }
     }
