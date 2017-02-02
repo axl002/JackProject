@@ -56,16 +56,28 @@ public class JackTest {
         int howMany = 0;
         while( howMany < numberOfQueryToGet){
             try {
-                goProduce(currentKey);
+//                File folder = new File("/home/user/Documents/apitest/hugedump");
+//                File[] listOfFiles = folder.listFiles();
+//
+//                for(int k = 0; k < listOfFiles.length; k++){
+//                    //File file = listOfFiles[k];
+//                    if( listOfFiles[k].getName().contains(".txt"))
+//                    {
+//                        goProduce(currentKey, pullLocalJson(listOfFiles[k]));
+//                        howMany++;
+//                    }
+//                }
+                goProduce(currentKey, "");
                 howMany++;
             } catch (Exception bad) {
                 bad.printStackTrace();
             }
+
         }
         System.out.println("Last key was: " + currentKey);
     }
 
-    private static void goProduce(String keyToUse) throws NullPointerException, InterruptedException, IOException{
+    private static void goProduce(String keyToUse, String content) throws NullPointerException, InterruptedException, IOException{
 
         //create object mapper load file to parse
         ObjectMapper mapper = new ObjectMapper();
@@ -73,7 +85,7 @@ public class JackTest {
         //URL url = new URL("http://api.pathofexile.com/public-stash-tabs?id=0");
         URL url = new URL(theSource + keyToUse);
 
-        String content = pullURL(url);
+        content = pullURL(url);
         JsonNode rootNode = null;
         if(!isContentNull(content)){
             rootNode = mapper.readTree(content);
@@ -119,7 +131,7 @@ public class JackTest {
                         item.setItemID(currentItem.get("id").asText());
                         item.setName(currentItem.get("name").asText());
                         item.setTypeLine(currentItem.get("typeLine").asText());
-                        //System.out.println(priceNote);
+                        System.out.println(priceNote);
                         item.setNote(priceNote);
 
                         item.setLastSeller(accountName);
@@ -153,6 +165,12 @@ public class JackTest {
         //TimeUnit.SECONDS.sleep(1);
         //System.out.println(url.toString());
         BufferedReader br = new BufferedReader(new InputStreamReader(whereToPull.openStream()));
+        return br.readLine();
+    }
+
+
+    private static String pullLocalJson(File file) throws IOException {
+        BufferedReader br = new BufferedReader((new FileReader(file)));
         return br.readLine();
     }
 

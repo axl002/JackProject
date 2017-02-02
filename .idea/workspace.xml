@@ -6,7 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4819b68-720e-4e23-b2f8-f102fae80199" name="Default" comment="" />
+    <list default="true" id="b4819b68-720e-4e23-b2f8-f102fae80199" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/JackKafka.class" afterPath="$PROJECT_DIR$/target/classes/JackKafka.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/JackTest.class" afterPath="$PROJECT_DIR$/target/classes/JackTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/JackKafka.java" afterPath="$PROJECT_DIR$/src/main/java/JackKafka.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/JackTest.java" afterPath="$PROJECT_DIR$/src/main/java/JackTest.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,8 +41,8 @@
       <file leaf-file-name="JackTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/JackTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="76" column="29" lean-forward="true" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
+            <state relative-caret-position="436">
+              <caret line="160" column="18" lean-forward="false" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,10 +53,12 @@
       <file leaf-file-name="JackKafka.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/JackKafka.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="150" column="117" lean-forward="false" selection-start-line="150" selection-start-column="117" selection-end-line="150" selection-end-column="117" />
+            <state relative-caret-position="414">
+              <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7573#7574#0" expanded="true" />
+                <element signature="e#7608#7609#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,6 +101,7 @@
       <find>1.1.4</find>
       <find>flink-core</find>
       <find>writeOutput</find>
+      <find>readLine</find>
     </findStrings>
     <replaceStrings>
       <replace>1.1.4</replace>
@@ -115,8 +124,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/ItemSerializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/Item.java" />
-        <option value="$PROJECT_DIR$/src/main/java/JackKafka.java" />
         <option value="$PROJECT_DIR$/src/main/java/JackTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/JackKafka.java" />
       </list>
     </option>
   </component>
@@ -525,6 +534,8 @@
           <caret line="137" column="82" lean-forward="true" selection-start-line="137" selection-start-column="82" selection-end-line="137" selection-end-column="82" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7573#7574#0" expanded="true" />
+            <element signature="e#7608#7609#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -616,16 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/JackTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="76" column="29" lean-forward="true" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -634,12 +635,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/JackKafka.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/JackTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="150" column="117" lean-forward="false" selection-start-line="150" selection-start-column="117" selection-end-line="150" selection-end-column="117" />
+        <state relative-caret-position="436">
+          <caret line="160" column="18" lean-forward="false" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/JackKafka.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7573#7574#0" expanded="true" />
+            <element signature="e#7608#7609#0" expanded="true" />
           </folding>
         </state>
       </provider>

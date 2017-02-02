@@ -29,6 +29,7 @@ public class JackKafka {
     static String whereToDump = "testdump/";
     static String topic = "poe2";
     static String currentKey;
+    static String pathToScrapedLogs = "/home/ubuntu/hugedump/";
 
     public static void main(String[] args) {
 
@@ -66,8 +67,17 @@ public class JackKafka {
         int howMany = 0;
         while( howMany < numberOfQueryToGet){
             try {
-                goProduce(currentKey);
-                howMany++;
+                File folder = new File("/home/ubuntu/hugedump");
+                File[] listOfFiles = folder.listFiles();
+
+                for(int k = 0; k < listOfFiles.length; k++){
+                    //File file = listOfFiles[k];
+                    if( listOfFiles[k].getName().contains(".json"))
+                    {
+                        goProduce(currentKey);
+                        howMany++;
+                    }
+                }
             } catch (Exception bad) {
                 bad.printStackTrace();
             }
@@ -83,6 +93,11 @@ public class JackKafka {
 
         //URL url = new URL("http://api.pathofexile.com/public-stash-tabs?id=0");
         URL url = new URL(theSource + keyToUse);
+
+
+
+
+
 
         String content = pullURL(url);
         JsonNode rootNode = null;
@@ -165,12 +180,16 @@ public class JackKafka {
         FileWriter fw = new FileWriter(new File(outPath + name + ".json"));
         fw.write(content);
         fw.close();
-
     }
     private static String pullURL(URL whereToPull) throws IOException, InterruptedException {
         //TimeUnit.SECONDS.sleep(1);
         //System.out.println(url.toString());
         BufferedReader br = new BufferedReader(new InputStreamReader(whereToPull.openStream()));
+        return br.readLine();
+    }
+
+    private static String pullLocalJson(File file) throws IOException {
+        BufferedReader br = new BufferedReader((new FileReader(file)));
         return br.readLine();
     }
 
