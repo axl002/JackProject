@@ -9,6 +9,8 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 // read data from kafka topic
@@ -37,7 +39,7 @@ public class ReadAndInsert {
         consumer = new KafkaConsumer<String, String>(props);
         consumer.subscribe(Arrays.asList(topic));
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
-
+        conn.use("poeapi");
         try {
             r.db("poeapi").tableCreate("itemCount").run(conn);
         }
@@ -63,8 +65,14 @@ public class ReadAndInsert {
             ConsumerRecords<String, String> records = consumer.poll(100);
 
             for (ConsumerRecord<String, String> record : records) {
-
-                r.db("poeapi").table("itemCount").insert(r.hashMap(record.value(), record.value())).run(conn);
+                //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
+                Pattern pattern = Pattern.compile("##@(.*?)@##");
+                Matcher matcher = pattern.matcher(record.value());
+                while (matcher.find()) {
+                    System.out.println(matcher.group(1));
+                }
+                System.out.println(record.toString());
+                r.table("itemCount").insert(r.hashMap(record.value(), record.value())).run(conn);
             }
         }
     }
