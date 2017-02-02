@@ -23,7 +23,7 @@ public class JackKafka {
 
     static KafkaProducer<String, String> producer;
     static int reps = 0;
-    static int numberOfQueryToGet = 20;
+    static int numberOfQueryToGet = 5000;
     static String startingKey = "0";
     static String theSource = "http://api.pathofexile.com/public-stash-tabs?id=";
     static String whereToDump = "testdump/";
@@ -67,18 +67,21 @@ public class JackKafka {
         int howMany = 0;
         while( howMany < numberOfQueryToGet){
             try {
-                File folder = new File("/home/ubuntu/hugedump");
-                File[] listOfFiles = folder.listFiles();
+//                File folder = new File("/home/ubuntu/hugedump");
+//                File[] listOfFiles = folder.listFiles();
+//
+//                for(int k = 0; k < listOfFiles.length; k++){
+//                    //File file = listOfFiles[k];
+//                    if( listOfFiles[k].getName().contains(".json"))
+//                    {
+//                        goProduce(currentKey, pullLocalJson(listOfFiles[k]));
+//
+//                        //System.out.println(howMany < numberOfQueryToGet);
+//                    }
+//                }
 
-                for(int k = 0; k < listOfFiles.length; k++){
-                    //File file = listOfFiles[k];
-                    if( listOfFiles[k].getName().contains(".json"))
-                    {
-                        goProduce(currentKey, pullLocalJson(listOfFiles[k]));
-                        howMany++;
-                        //System.out.println(howMany < numberOfQueryToGet);
-                    }
-                }
+                goProduce(currentKey, "");
+                howMany++;
             } catch (Exception bad) {
                 bad.printStackTrace();
             }
@@ -100,7 +103,7 @@ public class JackKafka {
 
 
 
-        //content = pullURL(url);
+        content = pullURL(url);
         JsonNode rootNode = null;
         if(!isContentNull(content)){
             rootNode = mapper.readTree(content);
