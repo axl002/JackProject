@@ -7,6 +7,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
+import java.util.Arrays;
 import java.util.Properties;
 
 
@@ -34,7 +35,7 @@ public class ReadAndInsert {
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
         consumer = new KafkaConsumer<String, String>(props);
-
+        consumer.subscribe(Arrays.asList(topic));
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
 
         try {
