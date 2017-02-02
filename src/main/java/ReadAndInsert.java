@@ -71,7 +71,7 @@ public class ReadAndInsert {
                 while (matcher.find()) {
                     System.out.println(matcher.group(1));
                 }
-                System.out.println(record.toString());
+                //System.out.println(record.toString());
                 r.table("itemCount").insert(r.hashMap(record.value(), record.value())).run(conn);
             }
         }
