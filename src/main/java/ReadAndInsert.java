@@ -64,7 +64,7 @@ public class ReadAndInsert {
 
             for (ConsumerRecord<String, String> record : records) {
 
-                r.db("poeapi").table("itemCount").insert(r.hashMap(record.value().charAt(0), record.value())).run(conn);
+                r.db("poeapi").table("itemCount").insert(r.hashMap(record.value(), record.value())).run(conn);
             }
         }
     }
