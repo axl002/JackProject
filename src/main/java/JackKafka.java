@@ -76,6 +76,7 @@ public class JackKafka {
                     {
                         goProduce(currentKey, pullLocalJson(listOfFiles[k]));
                         howMany++;
+                        System.out.println(howMany < numberOfQueryToGet);
                     }
                 }
             } catch (Exception bad) {
