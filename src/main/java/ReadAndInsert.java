@@ -71,8 +71,14 @@ public class ReadAndInsert {
                 matcher.find();
                 String key = matcher.group(1);
 
+
+                Pattern pattern2 = Pattern.compile("~doo~(.*?)~yoo~");
+                Matcher matcher2 = pattern2.matcher(record.value());
+                matcher2.find();
+                String value = matcher2.group(1);
+
                 //System.out.println(record.toString());
-                r.table("itemCount").insert(r.hashMap(key, record.value())).run(conn);
+                r.table("itemCount").insert(r.hashMap("itemName",key).with("count",value)).run(conn);
             }
         }
     }

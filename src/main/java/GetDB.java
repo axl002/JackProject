@@ -19,11 +19,11 @@ public class GetDB {
 
             //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
             //System.out.println(str);
-            Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
-            Matcher matcher = pattern.matcher(doc.toString());
+            //Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
+            //Matcher matcher = pattern.matcher(doc.toString());
             //while (matcher.find()) {
-            matcher.find();
-                System.out.println(matcher.group(1));
+            //matcher.find();
+                //System.out.println(matcher.group(1));
                 //System.out.println(matcher.group(0));
             //}
 
