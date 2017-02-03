@@ -66,13 +66,13 @@ public class ReadAndInsert {
 
             for (ConsumerRecord<String, String> record : records) {
                 //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
-                Pattern pattern = Pattern.compile("##@(.*?)@##");
+                Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
                 Matcher matcher = pattern.matcher(record.value());
-                while (matcher.find()) {
-                    System.out.println(matcher.group(1));
-                }
+                matcher.find();
+                String key = matcher.group(1);
+
                 //System.out.println(record.toString());
-                r.table("itemCount").insert(r.hashMap(record.value(), record.value())).run(conn);
+                r.table("itemCount").insert(r.hashMap(key, record.value())).run(conn);
             }
         }
     }

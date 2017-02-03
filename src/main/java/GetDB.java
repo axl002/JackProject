@@ -18,11 +18,15 @@ public class GetDB {
         for (Object doc : cursor) {
 
             //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
-            Pattern pattern = Pattern.compile("##@(.*?)@##");
+            //System.out.println(str);
+            Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
             Matcher matcher = pattern.matcher(doc.toString());
-            while (matcher.find()) {
+            //while (matcher.find()) {
+            matcher.find();
                 System.out.println(matcher.group(1));
-            }
+                //System.out.println(matcher.group(0));
+            //}
+
             System.out.println(doc.toString());
         }
         cursor.close();
