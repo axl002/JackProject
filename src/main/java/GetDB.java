@@ -14,7 +14,7 @@ public class GetDB {
 
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
         conn.use("poeapi");
-        Cursor cursor = r.table("itemCount").run(conn);
+        Cursor cursor = r.table("itemCount").changes().run(conn);
         for (Object doc : cursor) {
 
             //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
@@ -26,6 +26,7 @@ public class GetDB {
                 //System.out.println(matcher.group(1));
                 //System.out.println(matcher.group(0));
             //}
+
 
             System.out.println(doc.toString());
         }

@@ -78,7 +78,8 @@ public class ReadAndInsert {
                 String value = matcher2.group(1);
 
                 //System.out.println(record.toString());
-                r.table("itemCount").insert(r.hashMap("itemName",key).with("count",value)).run(conn);
+                //.with("count",value).with("itemName", key)
+                r.table("itemCount").insert(r.hashMap(key,value)).run(conn);
             }
         }
     }
