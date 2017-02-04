@@ -79,11 +79,12 @@ public class ReadAndInsert {
 
                 //System.out.println(record.toString());
                 //.with("count",value).with("itemName", key)
-                r.table("itemCount").insert(r.hashMap("itemName",key).with("foo","09").with("count",key)).run(conn);
+                r.table("itemCount").insert(r.hashMap("id",key)
+                        .with("itemName",key)
+                        .with("count",value)
+                ).run(conn);
             }
         }
     }
-
-
 
 }
