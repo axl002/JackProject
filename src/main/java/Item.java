@@ -32,10 +32,19 @@ public class Item{
         try {
             if(dankNote.contains("~b/o".toLowerCase())){
                 if (dankNote.contains("chaos")){
-                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""))/72;
+                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""));
                 }
                 else if (dankNote.contains("exa")){
-                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""));
+                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""))*83;
+                }
+                else if (dankNote.contains("jeweller")){
+                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""))/12;
+                }
+                else if (dankNote.contains("fusing")){
+                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""))/2.9;
+                }
+                else if (dankNote.contains("alchemy")){
+                    return Double.parseDouble(dankNote.replaceAll("[^0-9]+", ""))/2.5;
                 }
                 else {
                     return -1;
@@ -48,7 +57,6 @@ public class Item{
 
         return -2;
     }
-
 
 
 //    public void setRawJsonForm(String rawJsonForm){
@@ -66,7 +74,6 @@ public class Item{
     public String printExplicitMods(){
         return explicitMods;
     }
-
 
     public String getLastSeller(){
         return lastSeller;
