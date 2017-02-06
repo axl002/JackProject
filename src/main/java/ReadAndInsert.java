@@ -68,7 +68,7 @@ public class ReadAndInsert {
 
 
         while(true){
-            ConsumerRecords<String, String> records = consumer.poll(100);
+            ConsumerRecords<String, String> records = consumer.poll(1000);
             ObjectMapper om = new ObjectMapper();
             //JsonNode[] bucket = new JsonNode[records.count()];
             MapObject bucket = r.hashMap();
