@@ -75,13 +75,22 @@ public class ReadAndInsert {
                     jn = om.readTree(record.value());
 
                     //System.out.println(jn.toString());
-                    String key = jn.get("typeLine").asText();
+                    String key = jn.get("name")+jn.get("typeLine").asText();
                     String value = jn.get("price").asText();
 
 
                     r.table("itemCount").insert(r.hashMap("id",key)
                             .with("itemName",key)
                             .with("count",value)
+                            .with("count", jn.get("count"))
+                            .with("sellerID", jn.get("accountName").asText())
+                            .with("itemID", jn.get("id").asText())
+                            .with("x", jn.get("x").asText())
+                            .with("y", jn.get("y").asText())
+                            .with("note", jn.get("note").asText())
+                            .with("icon", jn.get("icon").asText())
+                            .with("league", jn.get("league").asText())
+
                     ).optArg("conflict","replace").run(conn);
                 }catch(IOException ioe){
                     System.out.println("fooooooo");
