@@ -73,6 +73,7 @@ public class ReadAndInsert {
                 try {
                     jn = om.readTree(record.toString());
                 }catch(IOException ioe){
+                    System.out.println("fooooooo");
                     ioe.printStackTrace();
                 }
 
