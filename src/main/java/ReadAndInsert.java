@@ -72,7 +72,7 @@ public class ReadAndInsert {
                 ObjectMapper om = new ObjectMapper();
                 JsonNode jn = null;
                 try {
-                    jn = om.readTree(record.toString());
+                    jn = om.readTree(record.value());
 
 
                     System.out.println(jn.toString());
