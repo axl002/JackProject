@@ -73,6 +73,17 @@ public class ReadAndInsert {
                 JsonNode jn = null;
                 try {
                     jn = om.readTree(record.toString());
+
+
+                    System.out.println(jn.toString());
+                    String key = jn.get("typeLine").asText();
+                    String value = jn.get("price").asText();
+
+
+                    r.table("itemCount").insert(r.hashMap("id",key)
+                            .with("itemName",key)
+                            .with("count",value)
+                    ).optArg("conflict","replace").run(conn);
                 }catch(IOException ioe){
                     System.out.println("fooooooo");
                     ioe.printStackTrace();
@@ -89,15 +100,8 @@ public class ReadAndInsert {
                 //Matcher matcher2 = pattern2.matcher(record.value());
                 //matcher2.find();
                 //String value = matcher2.group(1);
-                System.out.println(jn.toString());
-                String key = jn.get("typeLine").asText();
-                String value = jn.get("price").asText();
                 //System.out.println(record.toString());
                 //.with("count",value).with("itemName", key)
-                r.table("itemCount").insert(r.hashMap("id",key)
-                        .with("itemName",key)
-                        .with("count",value)
-                ).optArg("conflict","replace").run(conn);
             }
         }
     }
