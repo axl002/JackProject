@@ -63,12 +63,13 @@ public class ReadAndInsert {
 
     // loop to consume poe3 topic and insert to rethinkdb
     private static void consumeLoop(Connection conn){
-        ObjectMapper om = new ObjectMapper();
+
 
         while(true){
             ConsumerRecords<String, String> records = consumer.poll(100);
 
             for (ConsumerRecord<String, String> record : records) {
+                ObjectMapper om = new ObjectMapper();
                 JsonNode jn = null;
                 try {
                     jn = om.readTree(record.toString());
