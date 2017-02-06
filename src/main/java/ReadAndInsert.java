@@ -138,7 +138,7 @@ public class ReadAndInsert {
                 //System.out.println(record.toString());
                 //.with("count",value).with("itemName", key)
             }
-            System.out.println(bucket.size());
+            //System.out.println(bucket.size());
             r.table("itemCount").insert(bucket).optArg("conflict","replace").run(conn);
         }
     }
