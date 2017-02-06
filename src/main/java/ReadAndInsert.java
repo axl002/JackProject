@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rethinkdb.RethinkDB;
+import com.rethinkdb.model.MapObject;
 import com.rethinkdb.gen.exc.ReqlOpFailedError;
 import com.rethinkdb.net.Connection;
 import com.rethinkdb.net.Cursor;
@@ -11,9 +12,10 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 
 import java.io.IOException;
 import java.util.Arrays;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 // read data from kafka topic
@@ -68,8 +70,10 @@ public class ReadAndInsert {
         while(true){
             ConsumerRecords<String, String> records = consumer.poll(100);
             ObjectMapper om = new ObjectMapper();
-            for (ConsumerRecord<String, String> record : records) {
+            //JsonNode[] bucket = new JsonNode[records.count()];
 
+            for (ConsumerRecord<String, String> record : records) {
+                MapObject bucket = r.hashMap();
                 JsonNode jn = null;
                 try {
                     jn = om.readTree(record.value());
@@ -78,8 +82,7 @@ public class ReadAndInsert {
                     String key = jn.get("name")+jn.get("typeLine").asText();
                     String value = jn.get("price").asText();
 
-
-                    r.table("itemCount").insert(r.hashMap("id",key)
+                    bucket.with("id",key)
                             .with("itemName",key)
                             .with("count",value)
                             .with("count", jn.get("count"))
@@ -89,14 +92,38 @@ public class ReadAndInsert {
                             .with("y", jn.get("y").asText())
                             .with("note", jn.get("note").asText())
                             .with("icon", jn.get("icon").asText())
-                            .with("league", jn.get("league").asText())
+                            .with("league", jn.get("league").asText());
+//                    String count = jn.get("count").asText();
+//                    String accountName =jn.get("accountName").asText();
+//                    String id =jn.get("id").asText();
+//                    String x = jn.get("x").asText();
+//                    String y = jn.get("y").asText();
+//                    String note =  jn.get("note").asText();
+//                    String icon = jn.get("icon").asText();
+//                    String league = jn.get("league").asText();
 
-                    ).optArg("conflict","replace").run(conn);
+
+//                    r.table("itemCount").insert(r.hashMap("id",key)
+//                            .with("itemName",key)
+//                            .with("count",value)
+//                            .with("count", jn.get("count"))
+//                            .with("sellerID", jn.get("accountName").asText())
+//                            .with("itemID", jn.get("id").asText())
+//                            .with("x", jn.get("x").asText())
+//                            .with("y", jn.get("y").asText())
+//                            .with("note", jn.get("note").asText())
+//                            .with("icon", jn.get("icon").asText())
+//                            .with("league", jn.get("league").asText())
+
+ //                   ).optArg("conflict","replace").run(conn);
+//                    if(bucket.size() > 200){
+//                        r.table("itemCount").insert(bucket).optArg("conflict","replace").run(conn);
+//                    }
                 }catch(IOException ioe){
                     System.out.println("fooooooo");
                     ioe.printStackTrace();
                 }
-
+                r.table("itemCount").insert(bucket).optArg("conflict","replace").run(conn);
                 //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
                 //Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
                 //Matcher matcher = pattern.matcher(record.value());
