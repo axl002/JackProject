@@ -71,9 +71,9 @@ public class ReadAndInsert {
             ConsumerRecords<String, String> records = consumer.poll(100);
             ObjectMapper om = new ObjectMapper();
             //JsonNode[] bucket = new JsonNode[records.count()];
-
+            MapObject bucket = r.hashMap();
             for (ConsumerRecord<String, String> record : records) {
-                MapObject bucket = r.hashMap();
+
                 JsonNode jn = null;
                 try {
                     jn = om.readTree(record.value());
@@ -123,7 +123,7 @@ public class ReadAndInsert {
                     System.out.println("fooooooo");
                     ioe.printStackTrace();
                 }
-                r.table("itemCount").insert(bucket).optArg("conflict","replace").run(conn);
+
                 //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
                 //Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
                 //Matcher matcher = pattern.matcher(record.value());
@@ -138,6 +138,8 @@ public class ReadAndInsert {
                 //System.out.println(record.toString());
                 //.with("count",value).with("itemName", key)
             }
+            System.out.println(bucket.size());
+            r.table("itemCount").insert(bucket).optArg("conflict","replace").run(conn);
         }
     }
 
