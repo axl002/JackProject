@@ -67,15 +67,14 @@ public class ReadAndInsert {
 
         while(true){
             ConsumerRecords<String, String> records = consumer.poll(100);
-
+            ObjectMapper om = new ObjectMapper();
             for (ConsumerRecord<String, String> record : records) {
-                ObjectMapper om = new ObjectMapper();
+
                 JsonNode jn = null;
                 try {
                     jn = om.readTree(record.value());
 
-
-                    System.out.println(jn.toString());
+                    //System.out.println(jn.toString());
                     String key = jn.get("typeLine").asText();
                     String value = jn.get("price").asText();
 
