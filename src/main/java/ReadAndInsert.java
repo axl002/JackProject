@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.gen.exc.ReqlOpFailedError;
 import com.rethinkdb.net.Connection;
@@ -7,6 +9,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -60,23 +63,33 @@ public class ReadAndInsert {
 
     // loop to consume poe3 topic and insert to rethinkdb
     private static void consumeLoop(Connection conn){
+        ObjectMapper om = new ObjectMapper();
 
         while(true){
             ConsumerRecords<String, String> records = consumer.poll(100);
 
             for (ConsumerRecord<String, String> record : records) {
+                JsonNode jn = null;
+                try {
+                    jn = om.readTree(record.toString());
+                }catch(IOException ioe){
+                    ioe.printStackTrace();
+                }
+
                 //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
-                Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
-                Matcher matcher = pattern.matcher(record.value());
-                matcher.find();
-                String key = matcher.group(1);
+                //Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
+                //Matcher matcher = pattern.matcher(record.value());
+                //matcher.find();
+                //String key = matcher.group(1);
 
 
-                Pattern pattern2 = Pattern.compile("~doo~(.*?)~yoo~");
-                Matcher matcher2 = pattern2.matcher(record.value());
-                matcher2.find();
-                String value = matcher2.group(1);
+                //Pattern pattern2 = Pattern.compile("~doo~(.*?)~yoo~");
+                //Matcher matcher2 = pattern2.matcher(record.value());
+                //matcher2.find();
+                //String value = matcher2.group(1);
 
+                String key = jn.get("typeLine").asText();
+                String value = jn.get("price").asText();
                 //System.out.println(record.toString());
                 //.with("count",value).with("itemName", key)
                 r.table("itemCount").insert(r.hashMap("id",key)
