@@ -87,7 +87,7 @@ public class ReadAndInsert {
                 //Matcher matcher2 = pattern2.matcher(record.value());
                 //matcher2.find();
                 //String value = matcher2.group(1);
-
+                System.out.println(jn.toString());
                 String key = jn.get("typeLine").asText();
                 String value = jn.get("price").asText();
                 //System.out.println(record.toString());
