@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
 import com.rethinkdb.net.Cursor;
@@ -23,7 +25,15 @@ public class GetDB {
 
             //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
             //System.out.println(str);
-            String test1 = "~b/o 45 exa";
+            //String test1 = "{ "name" : "Bitterdream Shadow Sceptre", "avgPrice": 1.3333333333333333, "STD": 0.74535599249993, "threshold": -0.15737865166652676}";
+
+        ObjectMapper om = new ObjectMapper();
+        JsonNode jn;
+        try{
+            jn = om.readTree(test1);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
             String test2 = "~b/o 19.17 chaos";
             Pattern pattern = Pattern.compile("[0-9]+.*,*[0-9]*\\s");
 
