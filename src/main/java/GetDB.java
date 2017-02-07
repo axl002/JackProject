@@ -24,11 +24,11 @@ public class GetDB {
             //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
             //System.out.println(str);
             //Pattern pattern = Pattern.compile("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
-            String[] foober = doc.toString().split("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
-
-            if(foober.length >1){
-                System.out.println(foober[1].split("}")[0]);
-            }
+//            String[] foober = doc.toString().split("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
+//
+//            if(foober.length >1){
+//                System.out.println(foober[1].split("}")[0]);
+//            }
 
 
 //            Matcher matcher = pattern.matcher(doc.toString());
@@ -38,7 +38,7 @@ public class GetDB {
 //                System.out.println(matcher.group(0));
 
 
-            //System.out.println(doc.toString());
+            System.out.println(doc.toString());
         }
         //cursor.close();
         conn.close();

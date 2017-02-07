@@ -97,7 +97,8 @@ public class ReadAndInsert {
                             .with("icon", jn.get("icon").asText())
                             .with("league", jn.get("league").asText())
                             .with("price", value)
-                            .with("stashName", jn.get("stashName").asText());
+                            .with("stashName", jn.get("stashName").asText())
+                            .with("privateMessage", jn.get("privateMessage").asText());
 //                    String count = jn.get("count").asText();
 //                    String accountName =jn.get("accountName").asText();
 //                    String id =jn.get("id").asText();
