@@ -73,7 +73,7 @@ public class InsertLookUp {
             ConsumerRecords<String, String> records = consumer.poll(1000);
             ObjectMapper om = new ObjectMapper();
             //JsonNode[] bucket = new JsonNode[records.count()];
-            MapObject bucket = r.hashMap();
+            //MapObject bucket = r.hashMap();
             for (ConsumerRecord<String, String> record : records) {
 
                 JsonNode jn = null;
@@ -85,9 +85,12 @@ public class InsertLookUp {
 
                     // make key pretty
 
-                    bucket.with("id",jn.get("name").asText())
+                    r.table("lookUp").insert(r.hashMap("id", jn.get("name").asText())
                             .with("avgPrice",jn.get("avgPrice").asDouble())
-                            .with("STD", jn.get("STD").asDouble());
+                            .with("STD", jn.get("STD").asDouble())
+                            .with("threshold", jn.get("threshold").asDouble()))
+                            .run(conn);
+
                 }catch(IOException ioe){
                     System.out.println("fooooooo");
                     ioe.printStackTrace();
@@ -108,7 +111,6 @@ public class InsertLookUp {
                 //.with("count",value).with("itemName", key)
             }
             //System.out.println(bucket.size());
-            r.table("lookUp").insert(bucket).optArg("conflict","replace").run(conn);
         }
     }
 
