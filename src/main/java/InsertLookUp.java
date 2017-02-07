@@ -75,7 +75,7 @@ public class InsertLookUp {
             //JsonNode[] bucket = new JsonNode[records.count()];
             //MapObject bucket = r.hashMap();
             for (ConsumerRecord<String, String> record : records) {
-
+                System.out.println(record);
                 JsonNode jn = null;
                 try {
                     jn = om.readTree(record.value());
