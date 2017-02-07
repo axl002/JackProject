@@ -25,9 +25,12 @@ public class GetDB {
             //System.out.println(str);
             //Pattern pattern = Pattern.compile("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
             String[] foober = doc.toString().split("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
-            for(int i =0; i< foober.length; i++){
-                System.out.println(foober[i]);
+
+            if(foober.length >1){
+                System.out.println(foober[1].split("}")[0]);
             }
+
+
 //            Matcher matcher = pattern.matcher(doc.toString());
 //            //while (matcher.find()) {
 //            matcher.find();

@@ -124,7 +124,7 @@ public class JackKafka {
             String accountName = currentStash.get("accountName").asText();
             String stashId = currentStash.get("id").asText();
             //System.out.println(accountName);
-
+            String stashName = currentStash.get("stash").asText();
             JsonNode itemArray = currentStash.get("items");
             //System.out.println(itemArray.toString());
             if(itemArray != null){
@@ -137,7 +137,7 @@ public class JackKafka {
                     ObjectNode on = currentItem.deepCopy();
                     on.put("accountName", currentStash.get("accountName").asText());
                     on.put("stashID", currentStash.get("id").asText());
-
+                    on.put("stashName",stashName);
 //                    try {
 //                        String priceNote = currentItem.get("note").asText();
 //                        Item item = new Item();

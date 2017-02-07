@@ -79,11 +79,15 @@ public class ReadAndInsert {
                     jn = om.readTree(record.value());
 
                     //System.out.println(jn.toString());
-                    String key = jn.get("name").asText()+jn.get("typeLine").asText();
-                    String value = jn.get("price").asText();
 
-                    bucket.with("id",key)
-                            .with("itemName",key)
+
+                    // make key pretty
+                    String cleanName = jn.get("cleanName").asText();
+
+                    Double value = jn.get("price").asDouble();
+
+                    bucket.with("id",cleanName)
+                            .with("itemName",cleanName)
                             .with("count", jn.get("count").asText())
                             .with("sellerID", jn.get("accountName").asText())
                             .with("itemID", jn.get("id").asText())
@@ -92,7 +96,8 @@ public class ReadAndInsert {
                             .with("note", jn.get("note").asText())
                             .with("icon", jn.get("icon").asText())
                             .with("league", jn.get("league").asText())
-                            .with("price", value);
+                            .with("price", value)
+                            .with("stashName", jn.get("stashName").asText());
 //                    String count = jn.get("count").asText();
 //                    String accountName =jn.get("accountName").asText();
 //                    String id =jn.get("id").asText();
