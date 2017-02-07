@@ -12,18 +12,21 @@ public class GetDB {
     public static final RethinkDB r = RethinkDB.r;
     public static void main(String[] args){
 
-        Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
-        conn.use("poeapi");
-        Cursor foo = r.table("itemCount").filter(doc -> doc.g("id").match("Bow$")).run(conn);
-        Cursor cursor = r.table("itemCount").run(conn);
-        System.out.println(foo.toString());
-        System.out.println("iterator created");
+//        Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
+//        conn.use("poeapi");
+//        Cursor foo = r.table("itemCount").filter(doc -> doc.g("id").match("Bow$")).run(conn);
+//        Cursor cursor = r.table("itemCount").run(conn);
+//        System.out.println(foo.toString());
+//        System.out.println("iterator created");
 
-        for (Object doc : foo) {
+        //for (Object doc : foo) {
 
             //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
             //System.out.println(str);
-            //Pattern pattern = Pattern.compile("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
+            String test1 = "~b/o 45 exa";
+            String test2 = "~b/o 19.17 chaos";
+            Pattern pattern = Pattern.compile("[0-9]+.*,*[0-9]*\\s");
+
 //            String[] foober = doc.toString().split("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
 //
 //            if(foober.length >1){
@@ -31,18 +34,20 @@ public class GetDB {
 //            }
 
 
-//            Matcher matcher = pattern.matcher(doc.toString());
+            Matcher matcher = pattern.matcher(test1);
 //            //while (matcher.find()) {
-//            matcher.find();
+            matcher.find();
 //                System.out.println(matcher.group(1));
-//                System.out.println(matcher.group(0));
+                System.out.println(matcher.group(0));
+        matcher = pattern.matcher(test2);
 
+        matcher.find();
+        System.out.println(matcher.group(0));
 
-
-            System.out.println(doc.toString());
-        }
+            //System.out.println(doc.toString());
+        //}
         //cursor.close();
-        conn.close();
+        //conn.close();
 
 
     }

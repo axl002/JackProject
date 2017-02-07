@@ -20,17 +20,17 @@ import java.util.Properties;
 
 // read data from kafka topic
 // insert into rethink db
-public class ReadAndInsert {
+public class InsertLookUp {
 
 
 
-    public static final RethinkDB r = RethinkDB.r;
+    private static final RethinkDB r = RethinkDB.r;
     private static KafkaConsumer<String, String> consumer;
     public static void main(String[] args){
 
         Properties props = new Properties();
         // THIS WORKS NOW
-        String topic = "poe3";
+        String topic = "poe4";
         props.put("bootstrap.servers", "localhost:9092");
         props.put("group.id", "zookeeper"); // need to test if zookeeper is required group, it works but do other groups work?
         props.put("enable.auto.commit", "true");
@@ -46,9 +46,8 @@ public class ReadAndInsert {
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
         conn.use("poeapi");
         try {
-            r.db("poeapi").tableDrop("itemList").run(conn);
             r.db("poeapi").tableDrop("lookUp").run(conn);
-            r.db("poeapi").tableCreate("itemList").run(conn);
+
             r.db("poeapi").tableCreate("lookUp").run(conn);
         }
         catch (ReqlOpFailedError oops){
@@ -85,49 +84,10 @@ public class ReadAndInsert {
 
 
                     // make key pretty
-                    String cleanName = jn.get("cleanName").asText();
 
-                    Double value = jn.get("price").asDouble();
-
-                    bucket.with("id",jn.get("id").asText())
-                            .with("itemName",cleanName)
-                            .with("count", jn.get("count").asText())
-                            .with("sellerID", jn.get("accountName").asText())
-                            //.with("itemID", jn.get("id").asText())
-                            .with("x", jn.get("x").asText())
-                            .with("y", jn.get("y").asText())
-                            .with("note", jn.get("note").asText())
-                            .with("icon", jn.get("icon").asText())
-                            .with("league", jn.get("league").asText())
-                            .with("price", value)
-                            .with("stashName", jn.get("stashName").asText())
-                            .with("privateMessage", jn.get("privateMessage").asText());
-//                    String count = jn.get("count").asText();
-//                    String accountName =jn.get("accountName").asText();
-//                    String id =jn.get("id").asText();
-//                    String x = jn.get("x").asText();
-//                    String y = jn.get("y").asText();
-//                    String note =  jn.get("note").asText();
-//                    String icon = jn.get("icon").asText();
-//                    String league = jn.get("league").asText();
-
-
-//                    r.table("itemCount").insert(r.hashMap("id",key)
-//                            .with("itemName",key)
-//                            .with("count",value)
-//                            .with("count", jn.get("count"))
-//                            .with("sellerID", jn.get("accountName").asText())
-//                            .with("itemID", jn.get("id").asText())
-//                            .with("x", jn.get("x").asText())
-//                            .with("y", jn.get("y").asText())
-//                            .with("note", jn.get("note").asText())
-//                            .with("icon", jn.get("icon").asText())
-//                            .with("league", jn.get("league").asText())
-
- //                   ).optArg("conflict","replace").run(conn);
-//                    if(bucket.size() > 200){
-//                        r.table("itemCount").insert(bucket).optArg("conflict","replace").run(conn);
-//                    }
+                    bucket.with("id",jn.get("name").asText())
+                            .with("avgPrice",jn.get("avgPrice").asDouble())
+                            .with("STD", jn.get("STD").asDouble());
                 }catch(IOException ioe){
                     System.out.println("fooooooo");
                     ioe.printStackTrace();
@@ -148,7 +108,7 @@ public class ReadAndInsert {
                 //.with("count",value).with("itemName", key)
             }
             //System.out.println(bucket.size());
-            r.table("itemList").insert(bucket).optArg("conflict","replace").run(conn);
+            r.table("lookUp").insert(bucket).optArg("conflict","replace").run(conn);
         }
     }
 
