@@ -79,7 +79,7 @@ public class ReadAndInsert {
                     jn = om.readTree(record.value());
 
                     //System.out.println(jn.toString());
-                    String key = jn.get("name")+jn.get("typeLine").asText();
+                    String key = jn.get("name").asText()+jn.get("typeLine").asText();
                     String value = jn.get("price").asText();
 
                     bucket.with("id",key)

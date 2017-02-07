@@ -14,24 +14,30 @@ public class GetDB {
 
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
         conn.use("poeapi");
-        Cursor cursor = r.table("itemCount").changes().run(conn);
+        Cursor foo = r.table("itemCount").filter(doc -> doc.g("id").match("Bow$")).run(conn);
+        Cursor cursor = r.table("itemCount").run(conn);
+        System.out.println(foo.toString());
         System.out.println("iterator created");
-        for (Object doc : cursor) {
+
+        for (Object doc : foo) {
 
             //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
             //System.out.println(str);
-            //Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
-            //Matcher matcher = pattern.matcher(doc.toString());
-            //while (matcher.find()) {
-            //matcher.find();
-                //System.out.println(matcher.group(1));
-                //System.out.println(matcher.group(0));
-            //}
+            //Pattern pattern = Pattern.compile("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
+            String[] foober = doc.toString().split("<<set:.+>><<set:.+>><<set:.+>>(.*?)");
+            for(int i =0; i< foober.length; i++){
+                System.out.println(foober[i]);
+            }
+//            Matcher matcher = pattern.matcher(doc.toString());
+//            //while (matcher.find()) {
+//            matcher.find();
+//                System.out.println(matcher.group(1));
+//                System.out.println(matcher.group(0));
 
 
-            System.out.println(doc);
+            //System.out.println(doc.toString());
         }
-        cursor.close();
+        //cursor.close();
         conn.close();
 
 
