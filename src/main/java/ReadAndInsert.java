@@ -86,11 +86,11 @@ public class ReadAndInsert {
 
                     Double value = jn.get("price").asDouble();
 
-                    bucket.with("id",cleanName)
+                    bucket.with("id",jn.get("id").asText())
                             .with("itemName",cleanName)
                             .with("count", jn.get("count").asText())
                             .with("sellerID", jn.get("accountName").asText())
-                            .with("itemID", jn.get("id").asText())
+                            //.with("itemID", jn.get("id").asText())
                             .with("x", jn.get("x").asText())
                             .with("y", jn.get("y").asText())
                             .with("note", jn.get("note").asText())

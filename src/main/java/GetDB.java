@@ -38,6 +38,7 @@ public class GetDB {
 //                System.out.println(matcher.group(0));
 
 
+
             System.out.println(doc.toString());
         }
         //cursor.close();
