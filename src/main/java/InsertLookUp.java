@@ -89,7 +89,7 @@ public class InsertLookUp {
                             .with("avgPrice",jn.get("avgPrice").asDouble())
                             .with("STD", jn.get("STD").asDouble())
                             .with("threshold", jn.get("threshold").asDouble()))
-                            .run(conn);
+                            .optArg("conflict","replace").run(conn);
 
                 }catch(IOException ioe){
                     System.out.println("fooooooo");
