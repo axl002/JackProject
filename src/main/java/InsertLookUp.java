@@ -78,7 +78,7 @@ public class InsertLookUp {
                 System.out.println(record.value());
                 JsonNode jn = null;
                 try {
-                    jn = om.readTree(record.value());
+                    jn = om.readTree("{" + record.value() + "}");
 
                     //System.out.println(jn.toString());
 
