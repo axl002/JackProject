@@ -98,11 +98,6 @@ public class JackKafka {
         //URL url = new URL("http://api.pathofexile.com/public-stash-tabs?id=0");
         URL url = new URL(theSource + keyToUse);
 
-
-
-
-
-
         content = pullURL(url);
         JsonNode rootNode = null;
         if(!isContentNull(content)){
@@ -186,7 +181,7 @@ public class JackKafka {
         fw.close();
     }
     private static String pullURL(URL whereToPull) throws IOException, InterruptedException {
-        //TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(1);
         //System.out.println(url.toString());
         BufferedReader br = new BufferedReader(new InputStreamReader(whereToPull.openStream()));
         return br.readLine();
