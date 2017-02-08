@@ -88,7 +88,7 @@ public class InsertLookUp {
 
                     // make key pretty
                     try{
-                        String id = jn.get("name").asText();
+                        String id = jn.get("cleanName").asText();
                         String avgPrice = jn.get("avgPrice").asText();
                         String STD = jn.get("STD").asText();
                         String threshold = jn.get("threshold").asText();
