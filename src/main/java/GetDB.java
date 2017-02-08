@@ -13,7 +13,7 @@ public class GetDB {
 
     public static final RethinkDB r = RethinkDB.r;
     public static void main(String[] args){
-        String tableName = "itemList";
+        String tableName = "lookUp";
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
         conn.use("poeapi");
         //Cursor foo = r.table(tableName).filter(doc -> doc.g("id").match("Bow$")).run(conn);
