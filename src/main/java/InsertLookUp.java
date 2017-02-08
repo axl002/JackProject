@@ -54,7 +54,7 @@ public class InsertLookUp {
             // don't die if table no exist
             System.out.println("table already exists");
 
-            consumeLoop(conn);
+            //consumeLoop(conn);
 
 //            Cursor cursor = r.table("tv_shows").run(conn);
 //            for (Object doc : cursor) {
@@ -64,7 +64,6 @@ public class InsertLookUp {
         consumeLoop(conn);
         conn.close();
     }
-
     // loop to consume poe3 topic and insert to rethinkdb
     private static void consumeLoop(Connection conn){
 
@@ -75,7 +74,6 @@ public class InsertLookUp {
             //JsonNode[] bucket = new JsonNode[records.count()];
             //MapObject bucket = r.hashMap();
             for (ConsumerRecord<String, String> record : records) {
-                System.out.println(record.value());
                 JsonNode jn = null;
                 try {
                     jn = om.readTree(record.value());
@@ -96,22 +94,9 @@ public class InsertLookUp {
                     ioe.printStackTrace();
                 }
 
-                //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
-                //Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
-                //Matcher matcher = pattern.matcher(record.value());
-                //matcher.find();
-                //String key = matcher.group(1);
-
-
-                //Pattern pattern2 = Pattern.compile("~doo~(.*?)~yoo~");
-                //Matcher matcher2 = pattern2.matcher(record.value());
-                //matcher2.find();
-                //String value = matcher2.group(1);
-                //System.out.println(record.toString());
-                //.with("count",value).with("itemName", key)
             }
-            //System.out.println(bucket.size());
         }
+
     }
 
 }

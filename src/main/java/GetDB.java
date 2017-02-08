@@ -25,12 +25,16 @@ public class GetDB {
 
             //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
             //System.out.println(str);
-            //String test1 = "{ "name" : "Bitterdream Shadow Sceptre", "avgPrice": 1.3333333333333333, "STD": 0.74535599249993, "threshold": -0.15737865166652676}";
-
+            String test1 = "{\"name\": " + "\""+ "stuff"+ "\""
+        + ", \"avgPrice\": "+ 2D
+                + ", \"STD\": " + 3D
+                + ", \"threshold\": " + 4D
+                +"}";
         ObjectMapper om = new ObjectMapper();
         JsonNode jn;
         try{
             jn = om.readTree(test1);
+            System.out.println(jn.toString());
         }catch(Exception e){
             e.printStackTrace();
         }

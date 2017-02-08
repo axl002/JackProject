@@ -47,15 +47,15 @@ public class ReadAndInsert {
         conn.use("poeapi");
         try {
             r.db("poeapi").tableDrop("itemList").run(conn);
-            r.db("poeapi").tableDrop("lookUp").run(conn);
+
             r.db("poeapi").tableCreate("itemList").run(conn);
-            r.db("poeapi").tableCreate("lookUp").run(conn);
+
         }
         catch (ReqlOpFailedError oops){
             // don't die if table no exist
             System.out.println("table already exists");
 
-            consumeLoop(conn);
+            //consumeLoop(conn);
 
 //            Cursor cursor = r.table("tv_shows").run(conn);
 //            for (Object doc : cursor) {
@@ -133,21 +133,7 @@ public class ReadAndInsert {
                     ioe.printStackTrace();
                 }
 
-                //String str = "ZZZZL <%= dsn %> AFFF <%= AFG %>";
-                //Pattern pattern = Pattern.compile("\\s\\|\\s(.*?)~doo~");
-                //Matcher matcher = pattern.matcher(record.value());
-                //matcher.find();
-                //String key = matcher.group(1);
-
-
-                //Pattern pattern2 = Pattern.compile("~doo~(.*?)~yoo~");
-                //Matcher matcher2 = pattern2.matcher(record.value());
-                //matcher2.find();
-                //String value = matcher2.group(1);
-                //System.out.println(record.toString());
-                //.with("count",value).with("itemName", key)
             }
-            //System.out.println(bucket.size());
             r.table("itemList").insert(bucket).optArg("conflict","replace").run(conn);
         }
     }
