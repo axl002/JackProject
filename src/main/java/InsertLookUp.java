@@ -2,6 +2,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.gen.exc.ReqlOpFailedError;
+import com.rethinkdb.model.MapObject;
 import com.rethinkdb.net.Connection;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -72,7 +73,7 @@ public class InsertLookUp {
             ConsumerRecords<String, String> records = consumer.poll(1000);
             ObjectMapper om = new ObjectMapper();
             //JsonNode[] bucket = new JsonNode[records.count()];
-            //MapObject bucket = r.hashMap();
+            MapObject bucket = r.hashMap();
             for (ConsumerRecord<String, String> record : records) {
                 JsonNode jn = null;
                 try {
@@ -87,11 +88,10 @@ public class InsertLookUp {
                     Double avgPrice = jn.get("avgPrice").asDouble();
                     Double STD = jn.get("STD").asDouble();
                     Double threshold = jn.get("threshold").asDouble();
-                    r.table(TABLE_NAME).insert(r.hashMap("id", id)
+                    bucket.with("id", id)
                             .with("avgPrice",avgPrice)
                             .with("STD",STD )
-                            .with("threshold", threshold))
-                            .optArg("conflict","replace").run(conn);
+                            .with("threshold", threshold);
 
                 }catch(IOException ioe){
                     System.out.println("fooooooo");
@@ -99,6 +99,7 @@ public class InsertLookUp {
                 }
 
             }
+            r.table(TABLE_NAME).insert(bucket).optArg("conflict","replace").run(conn);
         }
 
     }
