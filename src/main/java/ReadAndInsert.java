@@ -26,6 +26,9 @@ public class ReadAndInsert {
 
     public static final RethinkDB r = RethinkDB.r;
     private static KafkaConsumer<String, String> consumer;
+    private static final String TABLE_NAME = "itemList";
+
+
     public static void main(String[] args){
 
         Properties props = new Properties();
@@ -48,7 +51,7 @@ public class ReadAndInsert {
         try {
             //r.db("poeapi").tableDrop("itemList").run(conn);
 
-            r.db("poeapi").tableCreate("itemList").run(conn);
+            r.db("poeapi").tableCreate(TABLE_NAME).run(conn);
 
         }
         catch (ReqlOpFailedError oops){
@@ -134,7 +137,7 @@ public class ReadAndInsert {
                 }
 
             }
-            r.table("itemList").insert(bucket).optArg("conflict","replace").run(conn);
+            r.table(TABLE_NAME).insert(bucket).optArg("conflict","replace").run(conn);
         }
     }
 

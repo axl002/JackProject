@@ -1,20 +1,15 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rethinkdb.RethinkDB;
-import com.rethinkdb.model.MapObject;
 import com.rethinkdb.gen.exc.ReqlOpFailedError;
 import com.rethinkdb.net.Connection;
-import com.rethinkdb.net.Cursor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.KafkaProducer;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 
@@ -26,7 +21,11 @@ public class InsertLookUp {
 
     private static final RethinkDB r = RethinkDB.r;
     private static KafkaConsumer<String, String> consumer;
+    private static final String TABLE_NAME = "lookUp";
+
+
     public static void main(String[] args){
+
 
         Properties props = new Properties();
         // THIS WORKS NOW
@@ -43,12 +42,13 @@ public class InsertLookUp {
 
         consumer = new KafkaConsumer<String, String>(props);
         consumer.subscribe(Arrays.asList(topic));
+
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
         conn.use("poeapi");
         try {
             //r.db("poeapi").tableDrop("lookUp").run(conn);
 
-            r.db("poeapi").tableCreate("lookUp").run(conn);
+            r.db("poeapi").tableCreate(TABLE_NAME).run(conn);
         }
         catch (ReqlOpFailedError oops){
             // don't die if table no exist
@@ -83,7 +83,7 @@ public class InsertLookUp {
 
                     // make key pretty
 
-                    r.table("lookUp").insert(r.hashMap("id", jn.get("name").asText())
+                    r.table(TABLE_NAME).insert(r.hashMap("id", jn.get("name").asText())
                             .with("avgPrice",jn.get("avgPrice").asDouble())
                             .with("STD", jn.get("STD").asDouble())
                             .with("threshold", jn.get("threshold").asDouble()))
