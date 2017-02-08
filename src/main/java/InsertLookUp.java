@@ -83,10 +83,14 @@ public class InsertLookUp {
 
                     // make key pretty
 
-                    r.table(TABLE_NAME).insert(r.hashMap("id", jn.get("name").asText())
-                            .with("avgPrice",jn.get("avgPrice").asDouble())
-                            .with("STD", jn.get("STD").asDouble())
-                            .with("threshold", jn.get("threshold").asDouble()))
+                    String id = jn.get("name").asText();
+                    Double avgPrice = jn.get("avgPrice").asDouble();
+                    Double STD = jn.get("STD").asDouble();
+                    Double threshold = jn.get("threshold").asDouble();
+                    r.table(TABLE_NAME).insert(r.hashMap("id", id)
+                            .with("avgPrice",avgPrice)
+                            .with("STD",STD )
+                            .with("threshold", threshold))
                             .optArg("conflict","replace").run(conn);
 
                 }catch(IOException ioe){
