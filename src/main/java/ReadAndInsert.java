@@ -31,6 +31,7 @@ public class ReadAndInsert {
 
     public static void main(String[] args){
 
+        String dbName = args[0];
         Properties props = new Properties();
         // THIS WORKS NOW
         String topic = "poe3";
@@ -46,7 +47,7 @@ public class ReadAndInsert {
 
         consumer = new KafkaConsumer<String, String>(props);
         consumer.subscribe(Arrays.asList(topic));
-        Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
+        Connection conn = r.connection().hostname(dbName).port(28015).connect();
         conn.use("poeapi");
         try {
             //r.db("poeapi").tableDrop("itemList").run(conn);

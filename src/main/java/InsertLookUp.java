@@ -30,7 +30,7 @@ public class InsertLookUp {
 
     public static void main(String[] args){
 
-
+        String dbName = args[0];
         Properties props = new Properties();
         // THIS WORKS NOW
         String topic = "poe4";
@@ -47,7 +47,7 @@ public class InsertLookUp {
         consumer = new KafkaConsumer<String, String>(props);
         consumer.subscribe(Arrays.asList(topic));
 
-        Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
+        Connection conn = r.connection().hostname(dbName).port(28015).connect();
         conn.use("poeapi");
         try {
             //r.db("poeapi").tableDrop("lookUp").run(conn);
