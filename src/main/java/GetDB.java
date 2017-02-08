@@ -22,7 +22,7 @@ public class GetDB {
         System.out.println("iterator created");
 
         for( Object item : cursor){
-            System.out.println(item);
+            System.out.println(item.toString());
         }
         //for (Object doc : foo) {
 
@@ -63,8 +63,8 @@ public class GetDB {
 
             //System.out.println(doc.toString());
         //}
-        //cursor.close();
-        //conn.close();
+        cursor.close();
+        conn.close();
 
 
     }
