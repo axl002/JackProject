@@ -93,6 +93,7 @@ public class InsertLookUp {
                     String STD = jn.get("STD").asText();
                     String threshold = jn.get("threshold").asText();
                     bucket.with("id", id)
+                            .with("name", id)
                             .with("avgPrice",Double.parseDouble(avgPrice))
                             .with("STD",Double.parseDouble(STD) )
                             .with("threshold", Double.parseDouble(threshold));
