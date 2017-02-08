@@ -82,7 +82,7 @@ public class InsertLookUp {
                 try {
                     jn = om.readTree(record.value());
 
-                    //System.out.println(jn.toString());
+                    System.out.println(record.value());
 
 
                     // make key pretty
