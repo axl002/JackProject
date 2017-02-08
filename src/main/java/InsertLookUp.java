@@ -1,14 +1,17 @@
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.gen.exc.ReqlOpFailedError;
 import com.rethinkdb.model.MapObject;
 import com.rethinkdb.net.Connection;
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 import java.util.Properties;
@@ -93,9 +96,9 @@ public class InsertLookUp {
                             .with("STD",STD )
                             .with("threshold", threshold);
 
-                }catch(IOException ioe){
+                }catch(Exception e){
                     System.out.println("fooooooo");
-                    ioe.printStackTrace();
+                    e.printStackTrace();
                 }
 
             }
