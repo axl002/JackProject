@@ -54,14 +54,14 @@ public class InsertLookUp {
             // don't die if table no exist
             System.out.println("table already exists");
 
-            //consumeLoop(conn);
+            consumeLoop(conn);
 
 //            Cursor cursor = r.table("tv_shows").run(conn);
 //            for (Object doc : cursor) {
 //                System.out.println(doc);
 //            }
         }
-        consumeLoop(conn);
+        //consumeLoop(conn);
         conn.close();
     }
     // loop to consume poe3 topic and insert to rethinkdb
