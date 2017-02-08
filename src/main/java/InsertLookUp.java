@@ -79,10 +79,10 @@ public class InsertLookUp {
             MapObject bucket = r.hashMap();
             for (ConsumerRecord<String, String> record : records) {
                 JsonNode jn = null;
-                System.out.println(record.value());
+                //System.out.println(record.value());
                 try {
                     jn = om.readTree(record.value());
-                    System.out.println(jn.toString());
+                    //System.out.println(jn.toString());
                     //System.out.println(record.value());
 
 
