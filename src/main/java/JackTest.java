@@ -92,64 +92,64 @@ public class JackTest {
             writeOutput(whereToDump,keyToUse,content);
         }
 
-        // extract next change id
+//         extract next change id
         String nextChangeId = rootNode.get("next_change_id").asText();
-
-        // make array of stashes
-        JsonNode bigStashArray = rootNode.get("stashes");
-
-        // iterate through and send each item in each stash
-        Iterator<JsonNode > bigIt = bigStashArray.iterator();
-        while( bigIt.hasNext()){
-
-            JsonNode currentStash = bigIt.next();
-            String accountName = currentStash.get("accountName").asText();
-            String stashId = currentStash.get("id").asText();
-            //System.out.println(accountName);
-
-            JsonNode itemArray = currentStash.get("items");
-            //System.out.println(itemArray.toString());
-            if(itemArray != null){
-
-                Iterator<JsonNode> itemIt = itemArray.iterator();
-                while(itemIt.hasNext()){
-
-                    JsonNode currentItem = itemIt.next();
-
-                    //JsonNode currentItem = itemIt.next();
-//                    String compositeItem = "{" + currentItem.asText() +"\n\"accountName\": " + currentStash.get("accountName") + ",\n" + "\"stashID\": " + currentStash.get("id")+ "}";
-//                    ObjectMapper compositeMapper = new ObjectMapper();
-//                    JsonNode compositeNode = null;
-//                    compositeNode = mapper.readTree(compositeItem);
-
-                    try {
-                        String priceNote = currentItem.get("note").asText();
-                        Item item = new Item();
-                        item.setY(currentItem.get("y").asText());
-                        item.setX(currentItem.get("x").asText());
-                        item.setIdentified(currentItem.get("identified").asBoolean());
-                        item.setItemID(currentItem.get("id").asText());
-                        item.setName(currentItem.get("name").asText());
-                        item.setTypeLine(currentItem.get("typeLine").asText());
-                        System.out.println(priceNote);
-                        item.setNote(priceNote);
-
-                        item.setLastSeller(accountName);
-                        item.setLastStashID(stashId);
-                        item.setLeague(currentItem.get("league").asText());
-                        item.setIlvl(currentItem.get("ilvl").asInt());
-                        try{
-                            item.setExplicitMods(currentItem.get("explicitMods").toString());
-                        }catch (NullPointerException noExpMods){
-                            // not all items have explicit mods
-                        }
-                        //System.out.println(item.toString());
-                    }catch (NullPointerException oopsNoNote){
-                        //System.out.println("no note, no price, no list");
-                    }
-                }
-            }
-        }
+//
+//        // make array of stashes
+//        JsonNode bigStashArray = rootNode.get("stashes");
+//
+//        // iterate through and send each item in each stash
+//        Iterator<JsonNode > bigIt = bigStashArray.iterator();
+//        while( bigIt.hasNext()){
+//
+//            JsonNode currentStash = bigIt.next();
+//            String accountName = currentStash.get("accountName").asText();
+//            String stashId = currentStash.get("id").asText();
+//            //System.out.println(accountName);
+//
+//            JsonNode itemArray = currentStash.get("items");
+//            //System.out.println(itemArray.toString());
+//            if(itemArray != null){
+//
+//                Iterator<JsonNode> itemIt = itemArray.iterator();
+//                while(itemIt.hasNext()){
+//
+//                    JsonNode currentItem = itemIt.next();
+//
+//                    //JsonNode currentItem = itemIt.next();
+////                    String compositeItem = "{" + currentItem.asText() +"\n\"accountName\": " + currentStash.get("accountName") + ",\n" + "\"stashID\": " + currentStash.get("id")+ "}";
+////                    ObjectMapper compositeMapper = new ObjectMapper();
+////                    JsonNode compositeNode = null;
+////                    compositeNode = mapper.readTree(compositeItem);
+//
+//                    try {
+//                        String priceNote = currentItem.get("note").asText();
+//                        Item item = new Item();
+//                        item.setY(currentItem.get("y").asText());
+//                        item.setX(currentItem.get("x").asText());
+//                        item.setIdentified(currentItem.get("identified").asBoolean());
+//                        item.setItemID(currentItem.get("id").asText());
+//                        item.setName(currentItem.get("name").asText());
+//                        item.setTypeLine(currentItem.get("typeLine").asText());
+//                        System.out.println(priceNote);
+//                        item.setNote(priceNote);
+//
+//                        item.setLastSeller(accountName);
+//                        item.setLastStashID(stashId);
+//                        item.setLeague(currentItem.get("league").asText());
+//                        item.setIlvl(currentItem.get("ilvl").asInt());
+//                        try{
+//                            item.setExplicitMods(currentItem.get("explicitMods").toString());
+//                        }catch (NullPointerException noExpMods){
+//                            // not all items have explicit mods
+//                        }
+//                        //System.out.println(item.toString());
+//                    }catch (NullPointerException oopsNoNote){
+//                        //System.out.println("no note, no price, no list");
+//                    }
+                //}
+            //}
+        //}
 
         // check if newIDReceived
         checkNew(nextChangeId);
@@ -162,7 +162,7 @@ public class JackTest {
 
     }
     private static String pullURL(URL whereToPull) throws IOException, InterruptedException {
-        //TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(1);
         //System.out.println(url.toString());
         BufferedReader br = new BufferedReader(new InputStreamReader(whereToPull.openStream()));
         return br.readLine();
