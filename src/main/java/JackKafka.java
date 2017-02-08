@@ -39,6 +39,9 @@ public class JackKafka {
             numberOfQueryToGet = Integer.parseInt(args[1]);
             whereToDump = args[2];
         }
+        if (args.length ==1){
+            startingKey = args[0];
+        }
 
         //kafka config
 
