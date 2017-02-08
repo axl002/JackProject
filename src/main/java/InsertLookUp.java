@@ -46,7 +46,7 @@ public class InsertLookUp {
         Connection conn = r.connection().hostname("35.166.62.31").port(28015).connect();
         conn.use("poeapi");
         try {
-            r.db("poeapi").tableDrop("lookUp").run(conn);
+            //r.db("poeapi").tableDrop("lookUp").run(conn);
 
             r.db("poeapi").tableCreate("lookUp").run(conn);
         }
