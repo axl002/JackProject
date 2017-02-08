@@ -88,15 +88,16 @@ public class InsertLookUp {
 
                     // make key pretty
 
-                    String id = jn.get("name").asText();
-                    String avgPrice = jn.get("avgPrice").asText();
-                    String STD = jn.get("STD").asText();
-                    String threshold = jn.get("threshold").asText();
-                    bucket.with("id", id)
-                            .with("name", id)
-                            .with("avgPrice",Double.parseDouble(avgPrice))
-                            .with("STD",Double.parseDouble(STD) )
-                            .with("threshold", Double.parseDouble(threshold));
+//                    String id = jn.get("name").asText();
+//                    String avgPrice = jn.get("avgPrice").asText();
+//                    String STD = jn.get("STD").asText();
+//                    String threshold = jn.get("threshold").asText();
+//                    bucket.with("id", id)
+//                            .with("name", id)
+//                            .with("avgPrice",Double.parseDouble(avgPrice))
+//                            .with("STD",Double.parseDouble(STD) )
+//                            .with("threshold", Double.parseDouble(threshold));
+                    bucket.with("content", record.value());
 
                 }catch(Exception e){
                     System.out.println("fooooooo");
