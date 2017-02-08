@@ -82,7 +82,7 @@ public class InsertLookUp {
                 System.out.println(record.value());
                 try {
                     jn = om.readTree(record.value());
-
+                    System.out.println(jn.toString());
                     //System.out.println(record.value());
 
 
